@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GetprofileService } from '../../providers/getprofile.service';
 import { NgForm  } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -12,11 +12,12 @@ import { IUser } from '../../models/IUser';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
+  @Input() isDisable: boolean;
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() onTrueDisable: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataUser: IUser;
   sex: boolean;
   userId: string;
-  disable: Boolean = false; // false: hide, true: show
-
   selectedFile: File = null;
 
   constructor(private userService: UserService,
@@ -57,6 +58,7 @@ export class EditComponent implements OnInit {
   }
 
   update(form: NgForm) {
+    this.onTrueDisable.emit(true);
     // console.log(form.value);
     // this._getprofile.update(this.userId, form.value).then(data => {
     //   this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
