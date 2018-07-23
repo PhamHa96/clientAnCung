@@ -39,7 +39,7 @@ import { GoogleMapAgmComponent } from './google-map-agm/google-map-agm.component
 import { environment } from '../environments/environment.prod';
 import { InfoComponent } from './content/info/info.component';
 import { UserComponent } from './user/user.component';
-// import { LeftComponent } from './user/left/left.component';
+import { LeftComponent } from './user/left/left.component';
 import { ChangepassComponent } from './user/changepass/changepass.component';
 import { SignoutComponent } from './user/signout/signout.component';
 import { EditComponent } from './user/edit/edit.component';
@@ -97,7 +97,8 @@ export function getAuthServiceConfigs() {
     EditComponent,
     AddLocationComponent,
     ContactComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    LeftComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@
     </ul>
     
     <button [routerLink]="['/profile']" class="btn btn-outline-danger my-2 my-sm-0" type="submit" *ngIf="isInLogin">
-      <i class="fas fa-user-circle"></i> Profile</button>
+      <i class="fas fa-user-circle"></i> {{user.name}} 's Profile </button>
     <button [routerLink]="['/login']" class="btn btn-outline-success my-2 my-sm-0" type="submit" *ngIf="!isInLogin"><i class="fas fa-sign-in-alt"></i> Sign In</button> 
 
   </div>

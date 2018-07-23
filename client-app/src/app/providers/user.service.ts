@@ -24,9 +24,9 @@ export class UserService {
     }
 
     getUserByToken() {
-        return this.htpp.get('https://ancungfriend.herokuapp.com/api/user', this.tokenService.addToken())
+        return this.htpp.get('https://ancungfriend.herokuapp.com/api/auth', this.tokenService.addToken())
             .pipe(map(user => {
-                console.log('user trong getUserBytoken', user );
+                console.log('user trong getUserBytoken', user.json() );
                 return user.json();
             }));
     }

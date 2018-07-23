@@ -43,7 +43,7 @@ export class MenuComponent implements OnInit {
     }
     this.userService.getUserByToken()
       .subscribe(user => {
-        console.log('user info' , this.user);
+        console.log('user info' , user.name);
         this.user = user;
         if (user) {
           this.isInLogin = true;

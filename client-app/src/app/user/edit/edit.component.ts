@@ -3,6 +3,8 @@ import { GetprofileService } from '../../providers/getprofile.service';
 import { NgForm  } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../providers/user.service';
+import { IUser } from '../../models/IUser';
 
 @Component({
   selector: 'app-edit',
@@ -10,14 +12,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  dataUser: any[];
+  dataUser: IUser;
   sex: boolean;
   userId: string;
   disable: Boolean = false; // false: hide, true: show
 
   selectedFile: File = null;
 
-  constructor(private _getprofile: GetprofileService,
+  constructor(private userService: UserService,
     private toastr: ToastrService,
     private http: HttpClient
   ) { }
@@ -25,25 +27,23 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.getProfile();
 
-    this._getprofile.Disable.subscribe(value => {
-      this.disable = value;
-    });
+    // this._getprofile.Disable.subscribe(value => {
+    //   this.disable = value;
+    // });
   }
 
   getProfile() {
-    this._getprofile.getProfile().then(data => {
-      console.log('data ----', data );
-      this.dataUser = data;
-      this.userId = data._id;
-      this._getprofile.userId = data._id;
-      if (data.Sex === 'male') {
+    this.userService.getUserByToken()
+      .subscribe(user => {
+        console.log('user info' , user.name);
+        this.dataUser = user;
+      });
+      if (this.dataUser.sex === 'male') {
         this.sex = true;
       } else {
         this.sex = false;
-       }
-    });
-  }
-
+      }
+    }
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile);
@@ -57,15 +57,15 @@ export class EditComponent implements OnInit {
   }
 
   update(form: NgForm) {
-    console.log(form.value);
-    this._getprofile.update(this.userId, form.value).then(data => {
-      this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
-      this._getprofile.setDisable(false);
-    });
+    // console.log(form.value);
+    // this._getprofile.update(this.userId, form.value).then(data => {
+    //   this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
+    //   this._getprofile.setDisable(false);
+    // });
   }
 
   cancel(form: NgForm) {
-    this._getprofile.setDisable(false);
+    // this._getprofile.setDisable(false);
   }
 
 }

@@ -1,13 +1,13 @@
-<!-- <div class="boss">
+<div class="boss">
   <div class="top row">
     <div class="col-md-4">
-      <img class="image" *ngIf="dataUser.Image!='' " src="assets/{{dataUser.Image}}" alt="" width="50" height="50">
-      <img class="image" *ngIf="dataUser.Image==='' " src="assets/images.png" alt="" width="50" height="50">
-      <img class="image" *ngIf="dataUser.Image!=='' " src="{{dataUser.Image}}" alt="" width="50" height="50">
+      <img class="image" *ngIf="user.image!='' " src="assets/{{user.image}}" alt="" width="50" height="50">
+      <img class="image" *ngIf="user.image ===''" src="./assets/defaultavatar.png" alt="" width="50" height="50">
+      <!-- <img class="image" *ngIf="dataUser.Image!=='' " src="{{dataUser.Image}}" alt="" width="50" height="50"> -->
     </div>
     <div class="info col-md-8 text-left">
-      <p style="font-weight: 700; margin-top: 12px; font-size:15px; color: rgb(72, 59, 255); cursor: pointer; " class="name">{{dataUser.Name}}</p>
-      <p style="margin-top: -10px;font-size:12px" class="address">{{dataUser.Address}}</p>
+      <p style="font-weight: 700; margin-top: 12px; font-size:15px; color: rgb(72, 59, 255); cursor: pointer; " class="name">{{user.name}}</p>
+      <p style="margin-top: -10px;font-size:12px" class="address">{{user.address}}</p>
     </div>
     <hr>
   </div>
@@ -28,4 +28,4 @@
       </button>
     </div>
   </div>
-</div> -->
+</div>
