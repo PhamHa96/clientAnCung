@@ -1,9 +1,9 @@
 <form class="form-group" #formProfile="ngForm" (ngSubmit)="update(formProfile)">
 <div class="text-center">
   <div *ngIf="dataUser">
-      <img class="image" *ngIf="dataUser.image!=='' " src="assets/{{dataUser.image}}" alt="" width="120" height="120">
-      <img class="image" *ngIf="dataUser.image==='' " src="assets/defaultimage.png" alt="" width="120" height="120">
-      <img class="image" *ngIf="dataUser.image!=='' " src="{{dataUser.image}}" alt="" width="120" height="120">
+      <!-- <img class="image" *ngIf="dataUser.image!=='' " src="assets/{{dataUser.image}}" alt="" width="120" height="120"> -->
+      <img class="image"  src="assets/defaultimage.png" alt="" width="120" height="120">
+      <!-- *ngIf="dataUser.image==='' " <img class="image" *ngIf="dataUser.image!=='' " src="{{dataUser.image}}" alt="" width="120" height="120"> -->
   </div>
   
   <div class="choose_file">

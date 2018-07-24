@@ -10,7 +10,7 @@ constructor(private http: Http) { }
 
   signUp(user: IUser) {
     return this.http.post('https://ancungfriend.herokuapp.com/api/user', user).pipe(map(res => {
-      console.log('ressssss', res )
+      console.log('ressssss', res );
       return res.json();
     }));
   }

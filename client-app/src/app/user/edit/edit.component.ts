@@ -17,9 +17,8 @@ export class EditComponent implements OnInit {
   @Output() onTrueDisable: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataUser: IUser;
   sex: boolean;
-  userId: string;
   selectedFile: File = null;
-
+  getTokenInLocalStorage =  localStorage.getItem('x');
   constructor(private userService: UserService,
     private toastr: ToastrService,
     private http: HttpClient
@@ -46,28 +45,41 @@ export class EditComponent implements OnInit {
       }
     }
   onFileSelected(event) {
-    this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile);
+    // this.selectedFile = <File>event.target.files[0];
+    // console.log(this.selectedFile);
 
-    const fd: any = new FormData();
-    fd.append('file', this.selectedFile, this.selectedFile.name);
-    const URL = 'http://localhost:8081/upload/' + this.userId;
-    this.http.post(URL, fd).subscribe(res => {
-      console.log(res);
-    });
-  }
-
-  update(form: NgForm) {
-    this.onTrueDisable.emit(true);
-    // console.log(form.value);
-    // this._getprofile.update(this.userId, form.value).then(data => {
-    //   this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
-    //   this._getprofile.setDisable(false);
+    // const fd: any = new FormData();
+    // fd.append('file', this.selectedFile, this.selectedFile.name);
+    // const URL = 'http://localhost:8081/upload/' + this.userId;
+    // this.http.post(URL, fd).subscribe(res => {
+    //   console.log(res);
     // });
   }
 
+  // update(form: NgForm) {
+  //   this.onTrueDisable.emit(true);
+  //   console.log('form.value', form.value);
+  //   this.userService.updateUser(this.dataUser._id, form.value).subscribe(data => {
+  //     console.log('data >>', data);
+  //     if (data) {
+  //       this.toastr.success('Edit successfully !');
+  //     } else {
+  //       this.toastr.error('Edit Fail');
+
+  //     }
+  //   });
+  // }
+  update(form: NgForm) {
+    console.log(form.value);
+    console.log('this.dataUser._id', this.dataUser._id);
+    this.userService.updateUser(form.value).then(data => {
+      this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
+      this.onTrueDisable.emit(true);
+    });
+  }
+
   cancel(form: NgForm) {
-    // this._getprofile.setDisable(false);
+    this.onTrueDisable.emit(true);
   }
 
 }
