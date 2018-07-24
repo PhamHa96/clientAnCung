@@ -1,3 +1,4 @@
+import { StatesService } from './../providers/state.service';
 import { Component, OnInit } from '@angular/core';
 import { TypeFoodService } from '../providers/type-food.service';
 
@@ -9,14 +10,14 @@ import { TypeFoodService } from '../providers/type-food.service';
 })
 export class ContentComponent implements OnInit {
   typeFood: any = {};
+  txtTim = '';
   constructor(
-    private _typeFood: TypeFoodService
+    private _typeFood: TypeFoodService, public _quananStateService: StatesService
   ) { }
 
   ngOnInit() {
     this.ngGetTypeFood();
   }
-
   ngGetTypeFood() {
     this._typeFood.getDataTypeFood();
     this._typeFood.getAllType.subscribe(data => {
@@ -24,6 +25,8 @@ export class ContentComponent implements OnInit {
       return this.typeFood;
     });
   }
-
+  search() {
+    this._quananStateService.find(this.txtTim as string);
+  }
 
 }

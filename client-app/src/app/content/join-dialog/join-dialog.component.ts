@@ -12,32 +12,14 @@ export class JoinDialogComponent implements OnInit {
   Callback: Function;
   test: string ="hello"
   constructor(
-    public thisDialogRef: MatDialogRef<JoinDialogComponent>,
-    @Inject(MAT_DIALOG_DATA)public data: any,
-    private _quanAnService : QuanAnService,
+    // public thisDialogRef: MatDialogRef<JoinDialogComponent>,
+    // @Inject(MAT_DIALOG_DATA)public data: any,
+    // private _quanAnService : QuanAnService,
 ) { }
 
 
 
   ngOnInit() {
-  this.ngLoadJoinParty();
-  }
-  
-  ngLoadJoinParty()
-  {
-    this._quanAnService.nhanIdQuanAn.subscribe(idQuanAn => this.idQuanAn = idQuanAn); //Nhận id từ service
-    this._quanAnService.getPartyQuanAn(this.idQuanAn);
-    this._quanAnService.partyQuan.subscribe(data => {
-      this.quanAn = data;
-      return this.quanAn;     
-    });
-  }
-
-  onCloseConfirm() {
-    this.thisDialogRef.close('confirm');
-  }
-
-  onCloseCancel() {
-    this.thisDialogRef.close('cancel');
+  // this.ngLoadJoinParty();
   }
 }

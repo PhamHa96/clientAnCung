@@ -1,7 +1,7 @@
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Inject, Output, EventEmitter, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {MyDialogComponent} from '../../content/my-dialog/my-dialog.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MyDialogComponent } from '../../content/my-dialog/my-dialog.component';
 import { QuanAnService } from '../../providers/quan-an.service';
 import { JoinDialogComponent } from '../join-dialog/join-dialog.component';
 @Component({
@@ -11,21 +11,22 @@ import { JoinDialogComponent } from '../join-dialog/join-dialog.component';
 })
 export class InfoComponent implements OnInit {
 
-  constructor(public _quananService: QuanAnService , public dialog: MatDialog, private router: Router, private active: ActivatedRoute) { }
+  constructor(public _quananService: QuanAnService, public dialog: MatDialog, private router: Router, private active: ActivatedRoute) { }
 
   ngOnInit() {
   }
   openDialog() {
-    let dialogRef = this.dialog.open(MyDialogComponent, {
-      width: '600px',
-    });
+    // let dialogRef = this.dialog.open(MyDialogComponent, {
+    //   width: '600px',
+    // });
   }
 
   openJoinDialog(idQuanAn) {
-    this._quananService.shareIdQuanAn(idQuanAn); //gọi service shareIdQuanAn và gửi id của quán
-    console.log(idQuanAn);
-      let dialogRef = this.dialog.open(JoinDialogComponent, {
-        width: '600px',
-      });
-    }
+    // this._quananService.shareIdQuanAn(idQuanAn); //gọi service shareIdQuanAn và gửi id của quán
+    // console.log(idQuanAn);
+    //   let dialogRef = this.dialog.open(JoinDialogComponent, {
+    //     width: '600px',
+    //   });
+    // }
+  }
 }

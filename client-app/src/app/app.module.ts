@@ -1,3 +1,4 @@
+import { StatesService } from './providers/state.service';
 import { TokenService } from './providers/token.service';
 import { UserService } from './providers/user.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -123,7 +124,7 @@ export function getAuthServiceConfigs() {
     MyDialogComponent,
     JoinDialogComponent
   ],
-  providers: [UserService, TokenService, QuanAnService, LoginService, SignupService, TypeFoodService, GetprofileService, {
+  providers: [StatesService, UserService, TokenService, QuanAnService, LoginService, SignupService, TypeFoodService, GetprofileService, {
     provide: AuthServiceConfig,
     useFactory: getAuthServiceConfigs
   }],
