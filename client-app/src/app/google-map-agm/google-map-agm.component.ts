@@ -1,3 +1,5 @@
+import { StatesService } from './../providers/state.service';
+import { IQuan } from './../models/IQuan';
 import { async } from '@angular/core/testing';
 import { AgmCoreModule } from '@agm/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -92,15 +94,21 @@ export class GoogleMapAgmComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
 
-  @ViewChild("search")
+  quans: IQuan[] = [];
+  @ViewChild('search')
   public searchElementRef: ElementRef;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    public dialog: MatDialog, private _quananStateService: StatesService
   ) { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this._quananStateService.QuanAn.subscribe(quans => {
+      this.quans = quans;
+      console.log('xem long lat quan ', this.quans);
+    });
+    this._quananStateService.getAll(); // lay all quan
     // set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
@@ -115,9 +123,9 @@ export class GoogleMapAgmComponent implements OnInit {
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+        types: ['address']
       });
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
           // get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -137,7 +145,7 @@ export class GoogleMapAgmComponent implements OnInit {
   }
   // GET MYLOCATION
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
@@ -145,5 +153,7 @@ export class GoogleMapAgmComponent implements OnInit {
       });
     }
   }
-
+  search() {
+    // this._quananStateService.find(this.txtTim as string);
+  }
 }

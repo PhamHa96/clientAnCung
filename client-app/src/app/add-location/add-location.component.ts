@@ -1,3 +1,4 @@
+import { IQuan } from './../models/IQuan';
 import { TypeFoodService } from './../providers/type-food.service';
 import { AgmCoreModule, CircleManager, MouseEvent } from '@agm/core';
 import { GoogleMap } from '@agm/core/services/google-maps-types';
@@ -22,6 +23,12 @@ import { FormControl } from '@angular/forms';
 })
 export class AddLocationComponent implements OnInit {
   typeFood: any = {};
+  quan: IQuan = {
+    name: '',
+    address : '',
+    long: 10,
+    lat: 106,
+  };
   //   mapClicked($event: MouseEvent) {
   //     this.setLat= $event.coords.lat;
   //     this.setLng= $event.coords.lng;
@@ -36,18 +43,20 @@ export class AddLocationComponent implements OnInit {
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
-
+  public file = new FormData();
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private _typeFood: TypeFoodService
+    private _typeFood: TypeFoodService,
+    private quanAnsv: QuanAnService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    // set google maps defaults
+    // set google maps defaults in 97 Man Thien, q9
     this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    this.latitude = 10.8478152;
+    this.longitude = 106.78600099999994;
 
     // create search FormControl
     this.searchControl = new FormControl();
@@ -74,6 +83,7 @@ export class AddLocationComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+          console.log('this.latitude , longitude===', this.latitude,  this.longitude );
         });
       });
     });
@@ -95,6 +105,27 @@ export class AddLocationComponent implements OnInit {
     this._typeFood.getAllType.subscribe(data => {
       this.typeFood = data;
       return this.typeFood;
+    });
+  }
+  // upload image
+  uploadImage(id) {
+    this.file.append('files', event.target[0].files);
+    this.quanAnsv.uploadImageRestaurent(this.file, id).subscribe(res => {
+        console.log('res in image', res);
+    });
+  }
+  // create restaurent
+  createRestaurent() {
+    this.quan.long = this.longitude;
+    this.quan.lat = this.latitude;
+    console.log('data get dc quan:::', this.quan);
+    this.quanAnsv.createRestaurent(this.quan).subscribe( res => {
+      if (res) {
+        this.uploadImage(res._id);
+        this.toastr.success('Create restaurent successfully!');
+      } else {
+        this.toastr.error('Create restaurent false !');
+      }
     });
   }
 }

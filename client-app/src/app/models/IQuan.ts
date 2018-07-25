@@ -1,5 +1,5 @@
 export interface IQuan {
-    _id: string;
+    _id?: string;
     name: string;
     typeFood?: string;
     minPrices?: string;
