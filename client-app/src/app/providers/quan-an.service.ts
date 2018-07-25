@@ -34,4 +34,15 @@ export class QuanAnService {
       });
     });
   }
+  createRestaurent(quan: IQuan) {
+    return this._http.post('https://ancungfriend.herokuapp.com/api/user', quan, this.Token).pipe(map(res => {
+      console.log(res);
+      return res.json();
+    }));
+  }
+  uploadImageRestaurent(formdata: FormData, id): Observable<any> {
+    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant/image/' + id , formdata).map(data => {
+      return data.json() as any;
+    });
+  }
 }

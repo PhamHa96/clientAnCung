@@ -16,7 +16,8 @@ export class EditComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onTrueDisable: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataUser: IUser;
-  sex: boolean;
+  form: NgForm;
+  // sex: boolean;
   selectedFile: File = null;
   getTokenInLocalStorage =  localStorage.getItem('x');
   constructor(private userService: UserService,
@@ -39,46 +40,36 @@ export class EditComponent implements OnInit {
         this.dataUser = user;
       });
       if (this.dataUser.sex === 'male') {
-        this.sex = true;
+        this.form.value.sex = 'male';
       } else {
-        this.sex = false;
+        this.form.value.sex = 'female';
       }
     }
   onFileSelected(event) {
-    // this.selectedFile = <File>event.target.files[0];
-    // console.log(this.selectedFile);
+    this.selectedFile = <File>event.target.files[0];
+    console.log('this.selectedFile', this.selectedFile);
 
-    // const fd: any = new FormData();
-    // fd.append('file', this.selectedFile, this.selectedFile.name);
-    // const URL = 'http://localhost:8081/upload/' + this.userId;
-    // this.http.post(URL, fd).subscribe(res => {
-    //   console.log(res);
-    // });
-  }
-
-  // update(form: NgForm) {
-  //   this.onTrueDisable.emit(true);
-  //   console.log('form.value', form.value);
-  //   this.userService.updateUser(this.dataUser._id, form.value).subscribe(data => {
-  //     console.log('data >>', data);
-  //     if (data) {
-  //       this.toastr.success('Edit successfully !');
-  //     } else {
-  //       this.toastr.error('Edit Fail');
-
-  //     }
-  //   });
-  // }
-  update(form: NgForm) {
-    console.log(form.value);
-    console.log('this.dataUser._id', this.dataUser._id);
-    this.userService.updateUser(form.value).then(data => {
-      this.toastr.success('Update Info succsessfully', '', { positionClass: 'toast-bottom-right' });
-      this.onTrueDisable.emit(true);
+    const fd: any = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    const URL = 'https://ancungfriend.herokuapp.com/api/avatar';
+    this.http.post(URL, fd ).subscribe(res => {
+      console.log(res);
     });
   }
 
-  cancel(form: NgForm) {
+  update(form: NgForm) {
+    console.log('data user', form.value, this.dataUser);
+    this.userService.update(form.value).subscribe(data => {
+      console.log(data);
+      if (data) {
+        this.toastr.success('Update Successfully');
+      } else {
+        this.toastr.error('Update Fail');
+
+      }
+    });
+  }
+  cancel() {
     this.onTrueDisable.emit(true);
   }
 

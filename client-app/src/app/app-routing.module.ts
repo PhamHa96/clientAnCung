@@ -36,7 +36,7 @@ const routes: Routes = [
   {path: 'addlocation', component: AddLocationComponent, canActivate: [LoginService]},
   {path: 'contact' , component: ContactComponent},
   {path: 'profile' , component: UserComponent},
-  {path: 'favorite' , component: FavoriteComponent},
+  {path: 'party' , component: FavoriteComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

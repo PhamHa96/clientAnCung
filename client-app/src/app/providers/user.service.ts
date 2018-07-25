@@ -33,8 +33,11 @@ export class UserService {
     // updateUser(id: String, user: IUser): Observable<any> {
     //     return this.http.put('https://ancungfriend.herokuapp.com/api/user/' + id, user, this.token) ;
     //   }
+    update(user: IUser): Observable<any> {
+        return this.http.put('https://ancungfriend.herokuapp.com/api/user/' , user, this.token);
+      }
     updateUser(body) {
-          return this.http.post('https://ancungfriend.herokuapp.com/api/user/' , body, this.token)
+          return this.http.put('https://ancungfriend.herokuapp.com/api/user/' , body, this.token)
             .toPromise()
             .then(response => response.json());
         }
