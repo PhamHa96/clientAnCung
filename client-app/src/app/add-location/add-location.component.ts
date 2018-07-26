@@ -14,6 +14,7 @@ import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core'
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AddLocationComponent implements OnInit {
   typeFood: any = {};
   quan: IQuan = {
     name: '',
-    address : '',
+    address: '',
     long: 10,
     lat: 106,
   };
@@ -58,7 +59,7 @@ export class AddLocationComponent implements OnInit {
     this.latitude = 10.8478152;
     this.longitude = 106.78600099999994;
 
-    // create search FormControl
+    // create search FormControl ảnh ở đâu nowi gửi ảnh
     this.searchControl = new FormControl();
 
     // set current position
@@ -83,7 +84,7 @@ export class AddLocationComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
-          console.log('this.latitude , longitude===', this.latitude,  this.longitude );
+          console.log('this.latitude , longitude===', this.latitude, this.longitude);
         });
       });
     });
@@ -108,24 +109,27 @@ export class AddLocationComponent implements OnInit {
     });
   }
   // upload image
-  uploadImage(id) {
-    this.file.append('files', event.target[0].files);
+  uploadImage(id, fileimage) {
+    this.file.append('files', fileimage);
     this.quanAnsv.uploadImageRestaurent(this.file, id).subscribe(res => {
-        console.log('res in image', res);
+      console.log('res in image', res);
     });
   }
   // create restaurent
-  createRestaurent() {
+  createRestaurent(event) {
     this.quan.long = this.longitude;
     this.quan.lat = this.latitude;
     console.log('data get dc quan:::', this.quan);
-    this.quanAnsv.createRestaurent(this.quan).subscribe( res => {
+    this.quanAnsv.createRestaurent(this.quan).subscribe(res => {
       if (res) {
-        this.uploadImage(res._id);
+        this.uploadImage(res._id, event.target[0].files);
+        console.log('this.file', this.file);
         this.toastr.success('Create restaurent successfully!');
       } else {
         this.toastr.error('Create restaurent false !');
       }
     });
   }
+
+
 }
