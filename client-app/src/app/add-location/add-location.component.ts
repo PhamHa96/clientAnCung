@@ -36,7 +36,7 @@ export class AddLocationComponent implements OnInit {
   //     this.getDataQuan(this.setLat, this.setLng);
   //     console.log(this.setLat + " , " + this.setLng);
   //   }
-
+  selectedFile: File = null ;
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -100,6 +100,10 @@ export class AddLocationComponent implements OnInit {
       });
     }
   }
+  onFileSelected(event) {
+    console.log('event file ', event);
+    this.selectedFile = event.target.files[0];
+  }
   // get list type food
   ngGetTypeFood() {
     this._typeFood.getDataTypeFood();
@@ -109,22 +113,21 @@ export class AddLocationComponent implements OnInit {
     });
   }
   // upload image
-  uploadImage(id, fileimage) {
-    this.file.append('files', fileimage);
-    this.quanAnsv.uploadImageRestaurent(this.file, id).subscribe(res => {
+  uploadImage(id) {
+    const fd = new FormData();
+    fd.append('files', this.selectedFile);
+    this.quanAnsv.uploadImageRestaurent(fd, id).subscribe(res => {
       console.log('res in image', res);
     });
   }
   // create restaurent
-  createRestaurent(event) {
+  createRestaurent() {
     this.quan.long = this.longitude;
     this.quan.lat = this.latitude;
     console.log('data get dc quan:::', this.quan);
     this.quanAnsv.createRestaurent(this.quan).subscribe(res => {
+      console.log('res quan tra ve', res);
       if (res) {
-        this.uploadImage(res._id, event.target[0].files);
-        console.log('this.file', this.file);
-        this.toastr.success('Create restaurent successfully!');
       } else {
         this.toastr.error('Create restaurent false !');
       }

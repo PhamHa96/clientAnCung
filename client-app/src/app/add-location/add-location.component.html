@@ -1,5 +1,4 @@
 <div class="container boss">
-  <form  class="form-group" (ngSubmit)="createRestaurent($event)" >
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-4">
         <span>Name:</span>
@@ -15,7 +14,7 @@
       </div>
 
       <div class="col-sm-6 col-md-4 col-lg-4">
-          <input type="submit" value="ok ok" >
+          
       </div>
     </div>
     <div class="row">
@@ -40,20 +39,20 @@
         <input step="1000" type="number" min="0" class="form-control" [(ngModel)]="quan.maxPrice" name="maxPrice">
       </div>
       <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-        <input style="margin-top:24px;" name="file" type="file" />
+        <input accept="image/*" style="margin-top:24px;"  (change)="onFileSelected($event)" name="file" type="file" />
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6">
         <p style="margin-top: 30px; margin-bottom:10px;">Detail </p>
         <textarea style="width: 500px ; height:300px" class="form-control" name="detail" id="" cols="30" rows="10" [(ngModel)]="quan.detail"></textarea>
-        <button style="margin-top: 30px; margin-bottom: 30px"  class="btn btn-outline-primary" >
+        <button type="submit" (click)="createRestaurent()" style="margin-top: 30px; margin-bottom: 30px"  class="btn btn-outline-primary" >
           <i class="fas fa-location-arrow"></i> Add new location</button>
       </div>
       <div style="margin-top: 32px" class="col-sm-12 col-md-6 col-lg-6">
         <span>Address: </span>
         <div class="form-group">
-          <input name="address" placeholder="Search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+          <input name="address" [(ngModel)]="quan.address" placeholder="Search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
             #search [formControl]="searchControl">
 
         </div>
@@ -62,5 +61,4 @@
         </agm-map>
       </div>
     </div>
-  </form>
 </div>

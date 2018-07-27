@@ -2,7 +2,7 @@
 <div class="text-center">
   <div *ngIf="dataUser">
       <!-- <img class="image" *ngIf="dataUser.image!=='' " src="assets/{{dataUser.image}}" alt="" width="120" height="120"> -->
-      <img class="image"  src="assets/defaultimage.png" alt="" width="120" height="120">
+      <img class="image"  src="assets/defaultavatar.png" alt="" width="120" height="120">
       <!-- *ngIf="dataUser.image==='' " <img class="image" *ngIf="dataUser.image!=='' " src="{{dataUser.image}}" alt="" width="120" height="120"> -->
   </div>
   
@@ -62,7 +62,7 @@
             </div>
             
             <div class="left col-md-6">
-              <button type="sunmit" class="btn btn-success" (click)="update()">Save Change</button>
+              <button type="submit" class="btn btn-success" (click)="update()">Save Change</button>
             </div>
             <div class="right col-md-6">
               <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>

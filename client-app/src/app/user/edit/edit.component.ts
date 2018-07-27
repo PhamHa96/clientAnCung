@@ -45,19 +45,17 @@ export class EditComponent implements OnInit {
         this.form.value.sex = 'female';
       }
     }
-  onFileSelected(event) {
-    this.selectedFile = <File>event.target.files[0];
-    console.log('this.selectedFile', this.selectedFile);
-
-    const fd: any = new FormData();
-    fd.append('file', this.selectedFile, this.selectedFile.name);
-    const URL = 'https://ancungfriend.herokuapp.com/api/avatar';
-    this.http.post(URL, fd ).subscribe(res => {
-      console.log(res);
-    });
-  }
+    onFileSelected(event) {
+      console.log('event file ', event);
+      this.selectedFile = event.target.files[0];
+    }
 
   update(form: NgForm) {
+    const fd = new FormData();
+    fd.append('files', this.selectedFile, this.selectedFile.name);
+    this.userService.uploadAvatarUser(fd, this.dataUser._id).subscribe(res => {
+      console.log('res in image', res);
+    });
     console.log('data user', form.value, this.dataUser);
     this.userService.update(form.value).subscribe(data => {
       console.log(data);

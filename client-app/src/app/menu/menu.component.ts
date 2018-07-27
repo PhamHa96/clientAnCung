@@ -16,7 +16,9 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
   // isLogin = new BehaviorSubject<Boolean>(false);
   isInLogin = false ;
-  user: IUser;
+  user: IUser = {
+    name: ''
+  };
   constructor(private userService: UserService, private _login: LoginService, private router: Router) {
   }
 

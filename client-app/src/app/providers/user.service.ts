@@ -18,7 +18,7 @@ export class UserService {
         console.log(password);
         return this.http.post('https://ancungfriend.herokuapp.com/api/auth/login', { email: email, password: password })
             .pipe(map(token => {
-                console.log('token o user service: ' , token);
+                console.log('token o user service: ', token);
                 return token.json();
             }));
     }
@@ -34,11 +34,16 @@ export class UserService {
     //     return this.http.put('https://ancungfriend.herokuapp.com/api/user/' + id, user, this.token) ;
     //   }
     update(user: IUser): Observable<any> {
-        return this.http.put('https://ancungfriend.herokuapp.com/api/user/' , user, this.token);
-      }
+        return this.http.put('https://ancungfriend.herokuapp.com/api/user/', user, this.token);
+    }
     updateUser(body) {
-          return this.http.put('https://ancungfriend.herokuapp.com/api/user/' , body, this.token)
+        return this.http.put('https://ancungfriend.herokuapp.com/api/user/', body, this.token)
             .toPromise()
             .then(response => response.json());
-        }
+    }
+    uploadAvatarUser(formdata: FormData, id): Observable<any> {
+        return this.http.post('https://ancungfriend.herokuapp.com/api/avatar' + id , formdata).map(data => {
+          return data.json() as any;
+        });
+      }
 }
