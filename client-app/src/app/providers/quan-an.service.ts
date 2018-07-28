@@ -20,7 +20,7 @@ export class QuanAnService {
       this.quan = quan;
     });
   }
-
+  private tokenGet = this.tokenSV.getToken();
   getAllRestaurents(): Observable<IQuan[]> {
     return this._http.get(this.apiUrl, this.Token).map(data => {
       console.log(data.json());
@@ -35,13 +35,13 @@ export class QuanAnService {
     });
   }
   createRestaurent(quan: IQuan) {
-    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant', quan, this.Token).pipe(map(res => {
+    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant', quan, this.tokenGet).pipe(map(res => {
       console.log('res in service', res);
       return res.json();
     }));
   }
   uploadImageRestaurent(formdata: FormData, id): Observable<any> {
-    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant/image/' + id , formdata, this.Token).map(data => {
+    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant/image/' + id , formdata, this.tokenGet).map(data => {
       return data.json() as any;
     });
   }

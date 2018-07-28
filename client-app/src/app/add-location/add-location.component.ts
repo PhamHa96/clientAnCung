@@ -128,6 +128,7 @@ export class AddLocationComponent implements OnInit {
     this.quanAnsv.createRestaurent(this.quan).subscribe(res => {
       console.log('res quan tra ve', res);
       if (res) {
+        this.uploadImage(res._id);
       } else {
         this.toastr.error('Create restaurent false !');
       }
