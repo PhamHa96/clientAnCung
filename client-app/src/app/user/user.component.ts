@@ -41,8 +41,8 @@ export class UserComponent implements OnInit {
   }
   signout() {
       localStorage.clear();
-      //     // this._login.setIsLogin(false);
-      // this.router.navigate(['/login']);
+      // this._login.setIsLogin(false);
+      this.router.navigate(['/login']);
   }
 
 }

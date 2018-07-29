@@ -14,7 +14,7 @@ export class AppComponent {
     const checkToken =  localStorage.getItem('x');
     console.log('token trong app', localStorage.getItem('x'));
     if (checkToken) {
-      this.router.navigate(['home']);
+
     } else {
       this.router.navigate(['login']);
     }

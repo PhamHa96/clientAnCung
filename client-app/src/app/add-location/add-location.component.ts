@@ -36,7 +36,7 @@ export class AddLocationComponent implements OnInit {
   //     this.getDataQuan(this.setLat, this.setLng);
   //     console.log(this.setLat + " , " + this.setLng);
   //   }
-  selectedFile: File = null ;
+  selectedFile: File = null;
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -128,7 +128,12 @@ export class AddLocationComponent implements OnInit {
     this.quanAnsv.createRestaurent(this.quan).subscribe(res => {
       console.log('res quan tra ve', res);
       if (res) {
-        this.uploadImage(res._id);
+        if (res.statusCode === 400) {
+          this.toastr.error('RESTAURANT IS EXISTED');
+        } else {
+          this.uploadImage(res._id);
+          this.toastr.success('Create restaurent success !');
+        }
       } else {
         this.toastr.error('Create restaurent false !');
       }

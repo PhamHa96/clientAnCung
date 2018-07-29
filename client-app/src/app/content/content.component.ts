@@ -10,7 +10,8 @@ import { TypeFoodService } from '../providers/type-food.service';
 })
 export class ContentComponent implements OnInit {
   typeFood: any = {};
-  txtTim = '';
+  getIdTypeFood: '';
+  txtTim: '';
   constructor(
     private _typeFood: TypeFoodService, public _quananStateService: StatesService
   ) { }
@@ -26,7 +27,15 @@ export class ContentComponent implements OnInit {
     });
   }
   search() {
-    this._quananStateService.find(this.txtTim as string);
+    if (this.txtTim === undefined || this.txtTim === '') {
+      const keySearch = this.getIdTypeFood;
+      this._quananStateService.find(keySearch as string);
+    } else if (this.getIdTypeFood === undefined) {
+      const keySearch = this.txtTim;
+      this._quananStateService.find(keySearch as string);
+    } else {
+      const keySearch = this.txtTim;
+      this._quananStateService.find(keySearch as string);
+    }
   }
-
 }

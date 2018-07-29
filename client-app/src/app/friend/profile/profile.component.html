@@ -1,8 +1,9 @@
 <div class="search">
   <span style="margin-left: 15px"><i class="fas fa-search"></i> Find your friend:</span>
   <div class="col-md-4">
-    <input width="100px" type="text" id="find" class="form-control" placeholder="Enter a name or email.." required autofocus>
-
+    <input [(ngModel)]="keySearchFriend" width="100px" type="text" id="find" class="form-control" placeholder="Enter a name or email.." required autofocus>
+    <button type="submit" (click)="search()"  class="btn btn-outline-primary" >
+      <i class="fas fa-location-arrow"></i> Search</button>
   </div>
 </div>
 <div style="margin-top: 20px" class="text-center">

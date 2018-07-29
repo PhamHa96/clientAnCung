@@ -1,3 +1,5 @@
+import { UserService } from './user.service';
+import { IUser } from './../models/IUser';
 import { IQuan } from './../models/IQuan';
 import { QuanAnService } from './quan-an.service';
 import { Injectable } from '@angular/core';
@@ -5,10 +7,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class StatesService {
     private quan: BehaviorSubject<IQuan[]> = new BehaviorSubject(new Array());
+    private user: BehaviorSubject<IUser[]> = new BehaviorSubject(new Array());
     get QuanAn() {
         return this.quan.asObservable();
     }
-    constructor(private quanansv: QuanAnService) { }
+    get User() {
+        return this.user.asObservable();
+    }
+    constructor(private quanansv: QuanAnService, private usersv: UserService) { }
     // thay doi
     getAll() {
         const sinhviens = this.quanansv.getAllRestaurents().subscribe(data => {
@@ -18,6 +24,16 @@ export class StatesService {
     find(keyword: string) {
         this.quanansv.searchRestaurent(keyword).subscribe(results => {
             this.quan.next(results);
+        });
+    }
+    getAllUser() {
+        const users = this.usersv.getAllUser().subscribe(data => {
+            this.user.next(data);
+        });
+    }
+    findUser(keyword: string) {
+        this.usersv.searchFriend(keyword).subscribe(results => {
+            this.user.next(results);
         });
     }
 }

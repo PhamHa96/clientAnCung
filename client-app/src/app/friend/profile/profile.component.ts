@@ -1,3 +1,4 @@
+import { StatesService } from './../../providers/state.service';
 import { Component, OnInit } from '@angular/core';
 import { GetprofileService } from '../../providers/getprofile.service';
 import { NgForm  } from '@angular/forms';
@@ -10,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProfileComponent implements OnInit {
   dataUser: any[];
-
-  constructor(private _getprofile: GetprofileService, private toastr: ToastrService) { }
+  keySearchFriend: '';
+  constructor(private _getprofile: GetprofileService, private toastr: ToastrService, private userStateService: StatesService) { }
 
   ngOnInit() {
     this.getProfile();
@@ -23,4 +24,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  search() {
+    this.userStateService.find(this.keySearchFriend as string);
+  }
 }

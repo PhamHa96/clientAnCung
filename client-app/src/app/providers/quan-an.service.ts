@@ -27,17 +27,17 @@ export class QuanAnService {
       return data.json() as IQuan[];
     });
   }
-  searchRestaurent(title: String) {
+  searchRestaurent(title: string) {
     return this.getAllRestaurents().map(quans => {
       return quans.filter(quan => {
-        return quan.name.toLowerCase().includes(title.toLowerCase());
+        return quan.name.toLowerCase().includes(title.toLowerCase()) || quan.typeFood.includes(title) ;
       });
     });
   }
   createRestaurent(quan: IQuan) {
     return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant', quan, this.tokenGet).pipe(map(res => {
       console.log('res in service', res);
-      return res.json();
+            return res.json();
     }));
   }
   uploadImageRestaurent(formdata: FormData, id): Observable<any> {

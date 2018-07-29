@@ -8,7 +8,7 @@
       </div>
       <div class="col-sm-12 col-md-6 col-lg-6">
         <span>Type</span>
-        <select class="form-control" style="height: 46px;">
+        <select placeholer="Choose type restaurent.." class="form-control" style="height: 46px;" [(ngModel)]="getIdTypeFood">
           <option *ngFor='let type of typeFood' value="{{type._id}}">{{type.name}}</option>
         </select>
       </div>

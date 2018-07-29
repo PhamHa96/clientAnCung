@@ -43,4 +43,18 @@ export class UserService {
           return data.json() as any;
         });
       }
+    // get all user
+    getAllUser(): Observable<IUser[]> {
+    return this.http.get('https://ancungfriend.herokuapp.com/api/user', this.token).map(data => {
+          console.log('hihi list user: ', data.json());
+          return data.json() as IUser[];
+        });
+      }
+    searchFriend(title: string) {
+        return this.getAllUser().map(users => {
+          return users.filter(user => {
+            return user.name.toLowerCase().includes(title.toLowerCase()) || user.email.includes(title) ;
+          });
+        });
+      }
 }
