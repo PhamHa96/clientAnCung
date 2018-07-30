@@ -15,7 +15,7 @@ import { JoinDialogComponent } from '../join-dialog/join-dialog.component';
 export class QuananComponent implements OnInit {
   quans: IQuan[] = [];
   txtTim = '';
-  constructor(public dialog: MatDialog, private _quananStateService: StatesService) { }
+  constructor(public dialog: MatDialog, private _quananStateService: StatesService, private quanAnsv: QuanAnService) { }
   ngOnInit(): void {
    this._quananStateService.QuanAn.subscribe(quans => {
      this.quans = quans;
@@ -25,7 +25,14 @@ export class QuananComponent implements OnInit {
   search() {
     this._quananStateService.find(this.txtTim as string);
   }
-  // bat khug kq
+  // mo create dialog
+  openDialog(idQuanAn) {
+    this.quanAnsv.shareIdQuanAn(idQuanAn); // gọi service shareIdQuanAn và gửi id của quán
+    console.log('idQuanAn', idQuanAn);
+      const dialogRef = this.dialog.open(MyDialogComponent, {
+        width: '600px',
+      });
+    }
 }
 
 

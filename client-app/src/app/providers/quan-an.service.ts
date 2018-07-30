@@ -15,6 +15,9 @@ export class QuanAnService {
   quan: IQuan[] = [];
   private Token = localStorage.getItem('x');
   private apiUrl = 'https://ancungfriend.herokuapp.com/api/restaurant/';
+
+  private idQuanAn = new BehaviorSubject<String>('');
+  nhanIdQuanAn = this.idQuanAn.asObservable();
   constructor(private _http: Http, private router: Router, private toastSV: ToastrService, private tokenSV: TokenService) {
     this.getAllRestaurents().subscribe(quan => {
       this.quan = quan;
@@ -45,4 +48,8 @@ export class QuanAnService {
       return data.json() as any;
     });
   }
+  shareIdQuanAn(data: String) {
+    this.idQuanAn.next(data);
+  }
+
 }

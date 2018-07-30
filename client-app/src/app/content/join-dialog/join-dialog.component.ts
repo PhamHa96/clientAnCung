@@ -7,10 +7,10 @@ import { QuanAnService } from '../../providers/quan-an.service';
   styleUrls: ['./join-dialog.component.scss']
 })
 export class JoinDialogComponent implements OnInit {
-  quanAn: any ={};
+  quanAn: any = {};
   idQuanAn: String;
   Callback: Function;
-  test: string ="hello"
+  test: string ='hello'
   constructor(
     // public thisDialogRef: MatDialogRef<JoinDialogComponent>,
     // @Inject(MAT_DIALOG_DATA)public data: any,

@@ -19,7 +19,7 @@
         <i style="color: gray;" class="fas fa-info-circle"></i> {{ quan.timeStart }} - {{ quan.timeAnd }} </p>
       <span class="btn">
         <button [routerLink]="['/quanan/',quan._id]" style="width:95px;" type="button" class="btn btn-outline-info">View more</button>
-        <button style="width:95px" type="button" class="btn btn-danger" (click)="openDialog()">Set party</button>
+        <button style="width:95px" type="button" class="btn btn-danger" (click)="openDialog(quan._id)">Set party</button>
         <button type="button" class="btn btn-success" (click)="openJoinDialog(quan._id)">Join</button>
       </span>
     </div>
