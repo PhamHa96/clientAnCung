@@ -51,5 +51,11 @@ export class QuanAnService {
   shareIdQuanAn(data: String) {
     this.idQuanAn.next(data);
   }
-
+  getOneRestaurentByID(id: String): Observable<IQuan> {
+    return this.getAllRestaurents().map(quan => {
+        return quan.find(idquan => {
+            return idquan._id === id;
+        });
+    });
+}
 }

@@ -2,8 +2,8 @@ export interface IQuan {
     _id?: string;
     name: string;
     typeFood?: string;
-    minPrices?: string;
-    maxPrices?: string;
+    minPrice?: string;
+    maxPrice?: string;
     timeStart?: string;
     timeAnd?: string;
     address?: string;

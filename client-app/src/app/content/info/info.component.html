@@ -10,18 +10,18 @@
       <div class="content">
         <img class="mb-4" src="assets/map-quanan.png" alt="" width="60" height="60">
         <h1>
-          <span>Mì Cay Khuya</span>
+          <span>{{quanAn.name}}}</span>
         </h1>
         <p style="font-size: 20px;">
-          <i class="fas fa-map-marker"></i> 323/3 Nguyen Trãi , P.Ngyen Cu Trinh, HCM</p>
+          <i class="fas fa-map-marker"></i> {{quanAn.address}}</p>
         <p style="font-size: 20px;">
-          <i class="fas fa-mobile-alt"></i> 01673.123.4123</p>
+          <i class="fas fa-mobile-alt"></i> {{quanAn.phone}}</p>
         <P class="time" class="adress" style="font-size: 20px;">
-          <i class="far fa-clock"></i> 11:00 - 17:00</P>
+          <i class="far fa-clock"></i> {{quanAn.timeStart}} - {{quanAn.timeAnd}}</P>
         <p class="minmax" style="font-size: 20;">
           <i class="fas fa-dollar-sign"></i>
-          <span style="font-size: 20px;">Min Price: 20.000vnd</span>
-          <span style="font-size: 20px; padding-left: 5%;">Max Price: 30.000vnd</span>
+          <span style="font-size: 20px;">Min Price: {{quanAn.minPrice}}</span>
+          <span style="font-size: 20px; padding-left: 5%;">Max Price: {{quanAn.maxPrice}}</span>
         </p>
         <div class="btn_flow">
           <button style="width:95px" type="button" class="btn btn-danger" (click)="openDialog()">Set party</button>
@@ -36,11 +36,9 @@
   </div>
   <!-- cmt -->
   <div class="row" style="background-color: slategray ; padding:  150px 0; ">
-    <div class="col-lg-8 mx-auto">
-      <h2>Google map</h2>
-      <p class="lead">This is Googlemaps</p>
-
-    </div>
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>    
   </div>
   <!-- Gmaps -->
   <div class="row" style="background-color: silver ; padding:  150px 0; ">

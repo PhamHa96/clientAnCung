@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'listfriend', component: FriendComponent},
-  {path: 'quanan/:id', component: InfoComponent},
+  {path: 'quanan/:_id', component: InfoComponent},
   {path: 'addlocation', component: AddLocationComponent, canActivate: [LoginService]},
   {path: 'contact' , component: ContactComponent},
   {path: 'profile' , component: UserComponent},
