@@ -1,3 +1,4 @@
+import { IParty } from './../models/IParty';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { IQuan } from './../models/IQuan';
@@ -15,7 +16,7 @@ import { ItypeFood } from '../models/ITypeFood';
 export class QuanAnService {
   quan: IQuan[] = [];
   private Token = localStorage.getItem('x');
-  private apiUrl = 'https://ancungfriend.herokuapp.com/api/restaurant/';
+  private apiUrl = 'https://ancungfriend.herokuapp.com/api/';
 
   private idQuanAn = new BehaviorSubject<String>('');
   nhanIdQuanAn = this.idQuanAn.asObservable();
@@ -26,7 +27,7 @@ export class QuanAnService {
   }
   private tokenGet = this.tokenSV.getToken();
   getAllRestaurents(): Observable<IQuan[]> {
-    return this._http.get(this.apiUrl, this.Token).map(data => {
+    return this._http.get(this.apiUrl + 'restaurant', this.Token).map(data => {
       console.log(data.json());
       return data.json() as IQuan[];
     });
@@ -34,18 +35,19 @@ export class QuanAnService {
   searchRestaurent(title: string) {
     return this.getAllRestaurents().map(quans => {
       return quans.filter(quan => {
-        return quan.name.toLowerCase().includes(title.toLowerCase()) || quan.typeFood.includes(title) ;
+        return quan.name.toLowerCase().includes(title.toLowerCase()) || quan.typeFood.includes(title);
       });
     });
   }
   createRestaurent(quan: IQuan) {
-    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant', quan, this.tokenGet).pipe(map(res => {
+    console.log('this.tokenGet', this.tokenGet);
+    return this._http.post(this.apiUrl + 'restaurant', quan, this.tokenGet).pipe(map(res => {
       console.log('res in service', res);
-            return res.json();
+      return res.json();
     }));
   }
   uploadImageRestaurent(formdata: FormData, id): Observable<any> {
-    return this._http.post('https://ancungfriend.herokuapp.com/api/restaurant/image/' + id , formdata, this.tokenGet).map(data => {
+    return this._http.post(this.apiUrl + '/restaurant/image/' + id, formdata, this.tokenGet).map(data => {
       return data.json() as any;
     });
   }
@@ -54,9 +56,16 @@ export class QuanAnService {
   }
   getOneRestaurentByID(id: String): Observable<IQuan> {
     return this.getAllRestaurents().map(quan => {
-        return quan.find(idquan => {
-            return idquan._id === id;
-        });
+      return quan.find(idquan => {
+        return idquan._id === id;
+      });
     });
-}
+  }
+  createParty(party: IParty) {
+    console.log('this.tokenGet', this.tokenGet);
+    return this._http.post(this.apiUrl + '/party', party, this.tokenGet).pipe(map(res => {
+      console.log('res in service', res);
+            return res.json();
+    }));
+  }
 }

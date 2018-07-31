@@ -1,5 +1,7 @@
+import { ToastrService } from 'ngx-toastr';
+import { IParty } from './../../models/IParty';
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { QuanAnService } from '../../providers/quan-an.service';
 import { IQuan } from '../../models/IQuan';
 
@@ -11,7 +13,13 @@ import { IQuan } from '../../models/IQuan';
 export class MyDialogComponent implements OnInit {
   quanAn: IQuan;
   idQuanAn: String;
-  constructor(private quanansv: QuanAnService, public thisDialogRef: MatDialogRef<MyDialogComponent>,
+  party: IParty = {
+    numberMax: 2,
+    timeStart: '',
+    timeEnd: '',
+    idRestaurant: ''
+  };
+  constructor(private quanansv: QuanAnService, public thisDialogRef: MatDialogRef<MyDialogComponent>, private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
@@ -19,7 +27,20 @@ export class MyDialogComponent implements OnInit {
 
   createParty() {
     this.quanansv.nhanIdQuanAn.subscribe(idQuanAn => this.idQuanAn = idQuanAn); // Nhận id từ service
-    console.log('id quan o create dialog: ', this.idQuanAn);
+    this.party.idRestaurant = this.idQuanAn;
+    console.log('party o create dialog: ', this.party);
+    this.quanansv.createParty(this.party).subscribe(res => {
+      console.log('res quan tra ve', res);
+      if (res) {
+        if (res.statusCode === 400) {
+          this.toastr.error('not exist restaurent!');
+        } else {
+          this.toastr.success('Create party success !');
+        }
+      } else {
+        this.toastr.error('Create restaurent false !');
+      }
+    });
   }
   onCloseConfirm() {
     this.createParty();
