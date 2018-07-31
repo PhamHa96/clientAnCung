@@ -10,6 +10,7 @@ import { TokenService } from './token.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import { ItypeFood } from '../models/ITypeFood';
 @Injectable()
 export class QuanAnService {
   quan: IQuan[] = [];

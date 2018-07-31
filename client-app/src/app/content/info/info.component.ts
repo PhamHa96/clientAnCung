@@ -15,7 +15,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class InfoComponent implements OnInit {
   public lat: Number;
   public lng: Number;
-  public zoom: number;
   quanAn: IQuan = {
     _id: '',
     name: '',
@@ -35,14 +34,14 @@ export class InfoComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = (params['_id'] as string);
-      console.log('id tren param ne>>', id);
       this._quananService.getOneRestaurentByID(id).subscribe(quan => {
         this.quanAn = quan;
+        this.lat = this.quanAn.lat;
+        this.lng = this.quanAn.long;
         console.log('this.quanAn', this.quanAn);
       });
     });
     console.log('check lng lat ', this.lng, this.lat);
-    this.zoom = 10;
   }
   openDialog() {
     // let dialogRef = this.dialog.open(MyDialogComponent, {

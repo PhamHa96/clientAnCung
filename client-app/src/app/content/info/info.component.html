@@ -10,7 +10,7 @@
       <div class="content">
         <img class="mb-4" src="assets/map-quanan.png" alt="" width="60" height="60">
         <h1>
-          <span>{{quanAn.name}}}</span>
+          <span>{{quanAn.name}}</span>
         </h1>
         <p style="font-size: 20px;">
           <i class="fas fa-map-marker"></i> {{quanAn.address}}</p>
@@ -36,7 +36,7 @@
   </div>
   <!-- cmt -->
   <div class="row" style="background-color: slategray ; padding:  150px 0; ">
-    <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-map zoom="8" [latitude]="lat" [longitude]="lng">
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
     </agm-map>    
   </div>

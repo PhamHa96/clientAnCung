@@ -4,6 +4,7 @@ import { ItypeFood } from '../models/ITypeFood';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -24,6 +25,19 @@ getDataTypeFood(): Promise<any> {
     return response.json();
   }).catch(err => console.log('loi lay url get'));
 }
-
+// cach 2
+getAllTypeFood(): Observable<ItypeFood[]> {
+  return this.http.get(this.urlGetTypeFood).map(data => {
+    // console.log(data.json());
+    return data.json() as ItypeFood[];
+  });
+}
+getTypeFoodByID(id: String): Observable <ItypeFood> {
+  return this.getAllTypeFood().map(type => {
+      return type.find(t => {
+          return t._id === id;
+      });
+  });
+}
 
 }
