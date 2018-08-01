@@ -26,8 +26,9 @@ export class QuanAnService {
     });
   }
   private tokenGet = this.tokenSV.getToken();
+  public tokenImage = this.tokenSV.getTokenforimage();
   getAllRestaurents(): Observable<IQuan[]> {
-    return this._http.get(this.apiUrl + 'restaurant', this.Token).map(data => {
+    return this._http.get(this.apiUrl + 'restaurant', this.tokenGet).map(data => {
       console.log(data.json());
       return data.json() as IQuan[];
     });
@@ -39,7 +40,7 @@ export class QuanAnService {
       });
     });
   }
-  createRestaurent(quan: IQuan) {
+  createRestaurent(quan: any) {
     console.log('this.tokenGet', this.tokenGet);
     return this._http.post(this.apiUrl + 'restaurant', quan, this.tokenGet).pipe(map(res => {
       console.log('res in service', res);
@@ -47,7 +48,7 @@ export class QuanAnService {
     }));
   }
   uploadImageRestaurent(formdata: FormData, id): Observable<any> {
-    return this._http.post(this.apiUrl + '/restaurant/image/' + id, formdata, this.tokenGet).map(data => {
+    return this._http.post(this.apiUrl + 'restaurant/image/' + id, formdata, this.tokenGet).map(data => {
       return data.json() as any;
     });
   }
@@ -61,11 +62,11 @@ export class QuanAnService {
       });
     });
   }
-  createParty(party: IParty) {
+  createParty(party: any) {
     console.log('this.tokenGet', this.tokenGet);
-    return this._http.post(this.apiUrl + '/party', party, this.tokenGet).pipe(map(res => {
+    return this._http.post(this.apiUrl + 'party', party, this.tokenGet).pipe(map(res => {
       console.log('res in service', res);
-            return res.json();
+      return res.json();
     }));
   }
 }

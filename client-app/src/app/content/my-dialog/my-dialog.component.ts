@@ -29,7 +29,8 @@ export class MyDialogComponent implements OnInit {
     this.quanansv.nhanIdQuanAn.subscribe(idQuanAn => this.idQuanAn = idQuanAn); // Nhận id từ service
     this.party.idRestaurant = this.idQuanAn;
     console.log('party o create dialog: ', this.party);
-    this.quanansv.createParty(this.party).subscribe(res => {
+    const x = JSON.stringify(this.party);
+    this.quanansv.createParty(x).subscribe(res => {
       console.log('res quan tra ve', res);
       if (res) {
         if (res.statusCode === 400) {

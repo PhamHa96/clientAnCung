@@ -115,7 +115,7 @@ export class AddLocationComponent implements OnInit {
   // upload image
   uploadImage(id) {
     const fd = new FormData();
-    fd.append('files', this.selectedFile);
+    fd.append('file', this.selectedFile, this.selectedFile.name);
     this.quanAnsv.uploadImageRestaurent(fd, id).subscribe(res => {
       console.log('res in image', res);
     });
@@ -124,8 +124,9 @@ export class AddLocationComponent implements OnInit {
   createRestaurent() {
     this.quan.long = this.longitude;
     this.quan.lat = this.latitude;
-    console.log('data get dc quan:::', this.quan);
-    this.quanAnsv.createRestaurent(this.quan).subscribe(res => {
+    const x = JSON.stringify(this.quan);
+    console.log('data get dc quan:::', x);
+    this.quanAnsv.createRestaurent(x).subscribe(res => {
       console.log('res quan tra ve', res);
       if (res) {
         if (res.statusCode === 400) {
