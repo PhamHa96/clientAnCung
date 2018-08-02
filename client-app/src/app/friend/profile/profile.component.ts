@@ -1,3 +1,5 @@
+import { IUser } from './../../models/IUser';
+import { UserService } from './../../providers/user.service';
 import { StatesService } from './../../providers/state.service';
 import { Component, OnInit } from '@angular/core';
 import { GetprofileService } from '../../providers/getprofile.service';
@@ -10,21 +12,25 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  dataUser: any[];
+  dataUser: IUser[];
+  usernow: IUser;
+  idCheckFriend: '';
   keySearchFriend: '';
-  constructor(private _getprofile: GetprofileService, private toastr: ToastrService, private userStateService: StatesService) { }
+  constructor(private usersv: UserService, private toastr: ToastrService, private userStateService: StatesService) { }
 
   ngOnInit() {
-    this.getProfile();
-  }
-
-  getProfile() {
-    this._getprofile.getProfile().then(data => {
-      this.dataUser = data;
+    this.usersv.getUserByToken()
+    .subscribe(user => {
+      console.log('user info' , user.name);
+      this.usernow = user;
+      this.idCheckFriend = user._id;
     });
   }
 
   search() {
-    this.userStateService.find(this.keySearchFriend as string);
+    this.usersv.getUsertByNameOrEmail(this.keySearchFriend).subscribe(data => {
+      this.dataUser = data;
+     console.log('user tim dc >>>', this.dataUser);
+    });
   }
 }

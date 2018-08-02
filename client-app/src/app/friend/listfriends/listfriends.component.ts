@@ -1,3 +1,4 @@
+import { UserService } from './../../providers/user.service';
 import { Component, OnInit } from '@angular/core';
 import { GetprofileService } from '../../providers/getprofile.service';
 
@@ -7,14 +8,14 @@ import { GetprofileService } from '../../providers/getprofile.service';
   styleUrls: ['./listfriends.component.scss']
 })
 export class ListfriendsComponent implements OnInit {
-  friendInfo: any[];
-  constructor(private _getprofile: GetprofileService) { }
+  userInfo: any[];
+  constructor(private usersv: UserService) { }
 
   ngOnInit() {
-    this._getprofile.getFriend().then(data => {
-      console.log(data);
-      this.friendInfo = data;
-    });
+    this.usersv.getUserByToken()
+      .subscribe(user => {
+        console.log('user info', user.name);
+        this.userInfo = user;
+      });
   }
-
 }

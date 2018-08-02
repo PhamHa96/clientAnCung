@@ -1,75 +1,45 @@
-<div class="search">
-  <span style="margin-left: 15px"><i class="fas fa-search"></i> Find your friend:</span>
+<div class="search col-md-12">
+  <div class="col-md-5">
+    <span style="margin-left: 15px">
+      <i class="fas fa-search"></i> Find your friend:</span>
+    <input [(ngModel)]="keySearchFriend" width="100px" type="text" id="find" class="form-control" placeholder="Enter a name or email.."
+      required autofocus>
+  </div>
   <div class="col-md-4">
-    <input [(ngModel)]="keySearchFriend" width="100px" type="text" id="find" class="form-control" placeholder="Enter a name or email.." required autofocus>
-    <button type="submit" (click)="search()"  class="btn btn-outline-primary" >
-      <i class="fas fa-location-arrow"></i> Search</button>
+    <button style="margin-top:8px" type="submit" (click)="search()" class="btn btn-outline-primary">
+      <i class="fas fa-search"></i> Search</button>
   </div>
 </div>
-<div style="margin-top: 20px" class="text-center">
-  <img class="image " src="assets/images.png" alt="" width="120" height="120">
-</div>
-<div class="info ">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-8 col-md-push-2">
-        <div class="row">
-
-          <div class="left col-md-6">
-            <p>Name:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Name}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Email:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Email}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Address:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Address}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Phone:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Phone}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Rate:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>No Infomation</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Sex:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Sex}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Birth day:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Birthday}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>Favorite Food:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.FavoriteFood}}</p>
-          </div>
-          <div class="left col-md-6">
-            <p>More detail:</p>
-          </div>
-          <div class="right col-md-6">
-            <p>{{dataUser.Detail}}</p>
-          </div>
-
+<div *ngFor='let user of dataUser' class="infouser">
+  <div class="col-md-12">
+    <div class="col-md-10 col-md-push-1">
+      <div class="row infomationfriend">
+        <div class="col-md-4">
+          <img class="image " src="assets/images.png" alt="" width="100" height="100">
+          <button *ngIf="user.friend[0].id_friend==idCheckFriend" style="margin-top: 117px; font-size:12px; margin-left: 9px " class="btnAddFriend"
+            type="button" class="btn btn-success"> Add Friend</button>
+          <span style="position: absolute ;margin-top: 117px; font-size:12px; margin-left: 9px; color:#26d626" *ngIf="user.friend[0].id_friend!=idCheckFriend">
+            <i class="fas fa-check"></i> Your friend</span>
+        </div>
+        <div class="col-md-3">
+          <p>
+            <b>Name:</b>
+          </p>
+          <p>
+            <b>Email:</b>
+          </p>
+          <p>
+            <b>Phone:</b>
+          </p>
+          <p>
+            <b>Sex:</b>
+          </p>
+        </div>
+        <div class="col-md-5">
+          <p>{{user.name}}</p>
+          <p>{{user.email}}</p>
+          <p>{{user.phone}}</p>
+          <p>{{user.sex}}</p>
         </div>
       </div>
     </div>

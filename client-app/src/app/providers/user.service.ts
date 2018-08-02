@@ -50,11 +50,20 @@ export class UserService {
           return data.json() as IUser[];
         });
       }
-    searchFriend(title: string) {
-        return this.getAllUser().map(users => {
-          return users.filter(user => {
-            return user.name.toLowerCase().includes(title.toLowerCase()) || user.email.includes(title) ;
+      getUsertByID(id: String): Observable<IUser> {
+        return this.getAllUser().map(user => {
+          return user.find(iduser => {
+            return iduser._id === id;
+          });
+        });
+      }
+      getUsertByNameOrEmail(keySearch: String): Observable<any> {
+        return this.getAllUser().map(user => {
+          return user.filter(iduser => {
+            return iduser.name.toLowerCase().includes(keySearch.toLowerCase())
+                    || iduser.email.toLowerCase().includes(keySearch.toLowerCase());
           });
         });
       }
 }
+
