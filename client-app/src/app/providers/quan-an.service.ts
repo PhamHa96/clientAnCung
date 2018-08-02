@@ -48,7 +48,7 @@ export class QuanAnService {
     }));
   }
   uploadImageRestaurent(formdata: FormData, id): Observable<any> {
-    return this._http.post(this.apiUrl + 'restaurant/image/' + id, formdata, this.tokenGet).map(data => {
+    return this._http.post(this.apiUrl + 'restaurant/image/' + id, formdata, this.tokenImage).map(data => {
       return data.json() as any;
     });
   }

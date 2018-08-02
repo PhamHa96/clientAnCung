@@ -26,7 +26,6 @@ export class TokenService {
   getTokenforimage() {
     const headers = new Headers();
     const token = localStorage.getItem('x');
-    headers.append('Content-Type', 'multipart/form-data');
     headers.append('x-access-token', token);
     const options = new RequestOptions({ headers: headers });
     return options;
