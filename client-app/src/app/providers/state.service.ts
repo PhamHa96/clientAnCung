@@ -31,9 +31,4 @@ export class StatesService {
             this.user.next(data);
         });
     }
-    findUser(keyword: string) {
-        this.usersv.searchFriend(keyword).subscribe(results => {
-            this.user.next(results);
-        });
-    }
 }
