@@ -1,3 +1,4 @@
+import { DetailpartyComponent } from './detailparty/detailparty.component';
 import { LoginService } from './providers/login.service';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { UserComponent } from './user/user.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'listfriend', component: FriendComponent},
   {path: 'quanan/:_id', component: InfoComponent},
+  {path: 'party/:_id', component: DetailpartyComponent},
   {path: 'addlocation', component: AddLocationComponent, canActivate: [LoginService]},
   {path: 'contact' , component: ContactComponent},
   {path: 'profile' , component: UserComponent},

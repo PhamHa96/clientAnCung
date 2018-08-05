@@ -21,6 +21,11 @@ export class StatesService {
             this.quan.next(data);
         });
     }
+    // getAll() {
+    //     return this.quanansv.getAllRestaurents().subscribe(data => {
+    //         return data;
+    //     });
+    // }
     find(keyword: string) {
         this.quanansv.searchRestaurent(keyword).subscribe(results => {
             this.quan.next(results);

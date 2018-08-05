@@ -5,29 +5,26 @@
   <hr>
   <mat-dialog-content>
     <!-- *ngFor='let quan of quanAn' -->
-    <div *ngFor='let party of quanAn.party' class="form1 container">      
+    <div *ngFor='let party of listParty' class="form1 container">      
       <div  class="row">
         <div class="col-sm-12 title">
           <h3>
-            <i class="fas fa-utensils"></i>{{party.title}}</h3>
+            <i class="fas fa-utensils"></i>{{party.titel}}</h3>
         </div>  
         <div class="col-sm-6">
           <label>Leader:</label>
-          <a>{{party.leader}} </a>
+          <a>Ha Pham</a>
           <br>
-          <label>Min prices</label> 30.000vnd
-          <br>
-          <label for="">Number join:</label> 3
+          <label for="">Number join:</label> {{party.currentNumber}}
           <i class="fas fa-user"></i>
         </div>
         <div class="col-sm-6">
-          <label>Number Max:</label> 3
+          <label>Number Max:</label> {{party.numberMax}}
           <i class="fas fa-users"></i>
           <br>
           <label for="">Time: 3 </label>
           <i class="far fa-clock"></i>
           <br>
-          <label>Type:</label> open
           <i class="fa fa-circle statut" aria-hidden="true"></i>
         </div>
       </div>

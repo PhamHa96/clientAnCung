@@ -49,6 +49,7 @@ import { GetprofileService } from './providers/getprofile.service';
 import { ContactComponent } from './contact/contact.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { TypeFoodService } from './providers/type-food.service';
+import { DetailpartyComponent } from './detailparty/detailparty.component';
 
 
 // import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -97,7 +98,8 @@ export function getAuthServiceConfigs() {
     EditComponent,
     AddLocationComponent,
     ContactComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    DetailpartyComponent
   ],
   imports: [
     BrowserModule,

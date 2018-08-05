@@ -1,9 +1,10 @@
+import { element } from 'protractor';
 import { StatesService } from './../../providers/state.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IQuan } from './../../models/IQuan';
 import { Component, OnInit, Inject, Output, EventEmitter, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {MyDialogComponent} from '../../content/my-dialog/my-dialog.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MyDialogComponent } from '../../content/my-dialog/my-dialog.component';
 import { QuanAnService } from '../../providers/quan-an.service';
 import { JoinDialogComponent } from '../join-dialog/join-dialog.component';
 
@@ -13,14 +14,32 @@ import { JoinDialogComponent } from '../join-dialog/join-dialog.component';
   styleUrls: ['./quanan.component.scss']
 })
 export class QuananComponent implements OnInit {
-  quans: IQuan[] = [];
+  quan: IQuan = {
+    name: '',
+    address: '',
+    image: [{image: ''}],
+  };
+  // quans: IQuan[] = [];
+  quans: any;
   txtTim = '';
   constructor(public dialog: MatDialog, private _quananStateService: StatesService, private quanAnsv: QuanAnService) { }
-  ngOnInit(): void {
-   this._quananStateService.QuanAn.subscribe(quans => {
-     this.quans = quans;
-   });
-   this._quananStateService.getAll();
+  async ngOnInit() {
+  //   await this.quanAnsv.getAllRestaurents().subscribe(data => {
+  //     this.quans = data;
+  //     this.quans.forEach(e => {
+  //       if (e.image.length > 0) { e.image = e.image[0].image; } else { e.image = null; }
+  //     });
+  //     console.log(this.quans, 'img');
+  // });
+  await this._quananStateService.getAll();
+  await this._quananStateService.QuanAn.subscribe(quans => {
+    this.quans = quans;
+    this.quans.forEach(e => {
+      if (e.image.length > 0) { e.image = e.image[0].image; } else { e.image = null; }
+    });
+    console.log(this.quans, 'img');
+  });
+    const v = 1;
   }
   search() {
     this._quananStateService.find(this.txtTim as string);
@@ -29,10 +48,17 @@ export class QuananComponent implements OnInit {
   openDialog(idQuanAn) {
     this.quanAnsv.shareIdQuanAn(idQuanAn); // gọi service shareIdQuanAn và gửi id của quán
     console.log('idQuanAn', idQuanAn);
-      const dialogRef = this.dialog.open(MyDialogComponent, {
-        width: '600px',
-      });
-    }
+    const dialogRef = this.dialog.open(MyDialogComponent, {
+      width: '600px',
+    });
+  }
+  openJoinDialog(idQuanAn) {
+    this.quanAnsv.shareIdQuanAn(idQuanAn); // gọi service shareIdQuanAn và gửi id của quán
+    console.log('idQuanAn', idQuanAn);
+    const dialogRef = this.dialog.open(JoinDialogComponent, {
+      width: '600px',
+    });
+  }
 }
 
 

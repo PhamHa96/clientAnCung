@@ -51,12 +51,12 @@ export class EditComponent implements OnInit {
     }
 
   update(form: NgForm) {
-    const fd = new FormData();
-    fd.append('files', this.selectedFile, this.selectedFile.name);
-    this.userService.uploadAvatarUser(fd, this.dataUser._id).subscribe(res => {
-      console.log('res in image', res);
-    });
-    console.log('data user', form.value, this.dataUser);
+    // const fd = new FormData();
+    // fd.append('files', this.selectedFile, this.selectedFile.name);
+    // this.userService.uploadAvatarUser(fd, this.dataUser._id).subscribe(res => {
+    //   console.log('res in image', res);
+    // });
+    console.log('data user', this.dataUser);
     this.userService.update(form.value).subscribe(data => {
       console.log(data);
       if (data) {

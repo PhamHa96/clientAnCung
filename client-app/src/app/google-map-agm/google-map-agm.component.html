@@ -38,7 +38,7 @@
     <agm-marker [latitude]="latitude" [longitude]="longitude">
       <agm-info-window style="font-size: 12px;">
         <div class="text-center">
-          <img src="https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg" width="130px" height="100px">
+          <img src="https://ancungfriend.herokuapp.com/public/restaurant/restaurant_1_5b6703bd4ad4a2002019cc9c.png" width="130px" height="100px">
         </div>
         <p>
           <i class="fas fa-map-marker"></i>Quan 3 con bo`</p>
@@ -65,7 +65,7 @@
     <agm-marker class="location" *ngFor="let marker of quans" [latitude]="marker.lat" [longitude]="marker.long" [iconUrl]="'assets/rsz_restaurant_marker.png'">
       <agm-info-window style="font-size: 12px;">
         <div class="text-center">
-          <img src="https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg" width="130px" height="100px">
+          <img src="https://ancungfriend.herokuapp.com/public/restaurant/restaurant_1_5b6703bd4ad4a2002019cc9c.png" width="130px" height="100px">
         </div>
         <p>
           <i class="fas fa-map-marker"></i>{{marker.name}}</p>

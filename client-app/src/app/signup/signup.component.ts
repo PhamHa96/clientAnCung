@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.checkValue();
     if (this.messErr === '') {
-      this.user.name = this.fistName + this.lastName;
+      this.user.name = this.fistName + ' ' + this.lastName;
       this._signup.signUp(this.user).subscribe(data => {
         if (data) {
           if (data.statusCode === 404) {
@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
           } else {
             this.toastr.success('Sign up success !');
           }
-          // console.log('data ---> ', data );
+           console.log('data sign up---> ', data );
         } else {
           this.toastr.error('Failed');
         }

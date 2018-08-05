@@ -32,15 +32,17 @@ export class UserService {
       }));
   }
   update(user: IUser): Observable<any> {
+    console.log('this.token', this.token);
     return this.http.put(this.apiUrl + 'user/', user, this.token);
   }
+  // ko xai below
   updateUser(body) {
-    return this.http.put(this.apiUrl + 'api/user/', body, this.token)
+    return this.http.put(this.apiUrl + 'user/', body, this.token)
       .toPromise()
       .then(response => response.json());
   }
   uploadAvatarUser(formdata: FormData, id): Observable<any> {
-    return this.http.post(this.apiUrl + 'api/avatar' + id, formdata).map(data => {
+    return this.http.post(this.apiUrl + '/avatar' + id, formdata).map(data => {
       return data.json() as any;
     });
   }
@@ -66,11 +68,21 @@ export class UserService {
       });
     });
   }
-  addFriend(id) {
-    return this.http.get(this.apiUrl + 'addfriend/' + id, this.token).map(data => {
-      console.log('add friend tra ve ', data.json());
-      return data.json();
+  addFriend(id, message) {
+    return this.http.post(this.apiUrl + 'user/addfriend/' + id, message , this.token).map(data => {
+      console.log('data aaaaaaaaa', data);
+      return data;
     });
+  }
+  add_friend(id, message) {
+    return this.http.post(this.apiUrl + 'user/addfriend/' + id, message , this.token);
+  }
+  follow(id) {
+    return this.http.post(this.apiUrl + 'user/addfriend/' + id, this.token).pipe(map(res => {
+      console.log('ressssss', res);
+      console.log('this.token)', this.token);
+      return res.json();
+    }));
   }
 }
 

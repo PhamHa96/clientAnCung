@@ -63,6 +63,11 @@ export class QuanAnService {
       });
     });
   }
+  getImageRestaurant(nameImage): Observable<any> {
+    return this._http.post(this.apiUrl + 'public/restaurant' + nameImage, this.tokenImage).map(data => {
+      return data.json() as any;
+    });
+  }
   // -----------------Party------------------
   createParty(party: any) {
     // console.log('this.tokenGet', this.tokenGet);
@@ -77,10 +82,17 @@ export class QuanAnService {
       return data.json() as IQuan[];
     });
   }
-  getPartyByIdRestaurant(id: String): Observable<IParty> {
-    return this._http.get(this.apiUrl + 'restaurant/' + id, this.tokenGet).map(data => {
+  getPartyByIdRestaurant(id: String): Observable<IParty[]> {
+    return this._http.get(this.apiUrl + 'party?idrestaurant=' + id, this.tokenGet).map(data => {
       console.log('party get dc theo id quan ', data.json());
-      return data.json() as IParty;
+      return data.json() as IParty[];
+    });
+  }
+  getPartyByID(id: String): Observable<IParty> {
+    return this.getAllParty().map(p => {
+      return p.find(party => {
+        return party._id === id;
+      });
     });
   }
 }

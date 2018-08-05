@@ -1,3 +1,5 @@
+import { element } from 'protractor';
+import { map } from 'rxjs/operators';
 import { IUser } from './../models/IUser';
 import { UserService } from './../providers/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,15 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friend.component.scss']
 })
 export class FriendComponent implements OnInit {
-  userNow: IUser;
+  listFriend: any[] = [];
+  objListFriend: Array<IUser> = [];
   constructor(private usersv: UserService) { }
 
-  ngOnInit() {
-    this.usersv.getUserByToken()
-    .subscribe(user => {
-      console.log('user infi in friendcomponent: ' , user);
-        this.userNow = user;
+  async ngOnInit() {
+    await this.usersv.getUserByToken().subscribe(user => {
+      // console.log('user infi in friendcomponent: ' , user);
+        this.listFriend = user.friend;
+        console.log(this.listFriend);
+        this.listFriend.forEach(item => {
+          this.usersv.getUsertByID(item.id_friend).subscribe(a => {
+                this.objListFriend.push(a);
+          });
+        });
+        console.log('check kq>>>>> ', this.objListFriend);
     });
   }
-
 }
